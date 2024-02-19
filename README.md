@@ -1,6 +1,6 @@
 # 🛠️ Task 1
 
-![[assets/Pasted image 20240219212612.png|300]]\
+<img src="/assets/Pasted image 20240219212612.png" width = 300px/>\
 **path**: `/ui/snacks/SnackCard.kt`
 
 ## Notes
@@ -11,7 +11,7 @@
 
 # 🛠️ Task 2
 
-![[assets/Pasted image 20240219224225.png|300]]\
+<img src="/assets/Pasted image 20240219224225.png" width = 300px/>\
 **path**: `/ui/details/SnackDetails.kt`
 
 ## 📚 Cheatsheet
