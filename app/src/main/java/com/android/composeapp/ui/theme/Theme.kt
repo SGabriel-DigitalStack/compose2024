@@ -93,7 +93,6 @@ fun JetsnackTheme(
 
     ProvideJetsnackColors(colors) {
         MaterialTheme(
-            colors = debugColors(darkTheme),
             typography = Typography,
             shapes = Shapes,
             content = content
