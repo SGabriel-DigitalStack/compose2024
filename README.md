@@ -1,40 +1,42 @@
-# 🛠️ Task 1
+# 🛠️ Task 
 
-<img src="/assets/Pasted image 20240219212612.png" width = 300px/>\
-**path**: `/ui/snacks/SnackCard.kt`
+<img src="https://github.com/SGabriel-DigitalStack/compose2024/assets/160568109/13fe7533-21c1-46c0-b969-99bf859b77b4"/>
 
-## Notes
+**path**: `/ui/cart/CartScreen.kt`
 
-- instead of the gradient, 🎨`JetsnackTheme.colors.brand` can be used instead
-- the image can be loaded using `UrlImage` from `/ui/components/UrlImage`
-- the image will show the pop-corn placeholder until the app or the preview are run
+**TODO**
+- ✏️ add state to the screen to track
+  -  quantity of each item
+  -  tips
+- ✏️ add tips slider (use `TipsSlider` Composable)
+  - add tips text row
+- 🐞 fix the item count bug
+  
+![order_screen_bug](https://github.com/SGabriel-DigitalStack/compose2024/assets/160568109/6b674ae3-22af-4c1e-80ca-659ea99cf3e3)
 
-# 🛠️ Task 2
+# 📚 Cheatsheet
+```kotlin
+val counter = remember { mutableStateOf(0) }
 
-<img src="/assets/Pasted image 20240219224225.png" width = 300px/>\
-**path**: `/ui/details/SnackDetails.kt`
+Button(onClick = { counter.value++ }) {
+  Text("Increment")
+}
+```
 
-## 📚 Cheatsheet
+```kotlin
+TipsSlider(
+  tipsPercent = currentValue,
+  onValueChange = { newValue -> ... }
+)
+```
 
 #### Composables
 
 [Box](https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/package-summary#Box(androidx.compose.ui.Modifier))\
 [Column](https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/package-summary#Column(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Vertical,androidx.compose.ui.Alignment.Horizontal,kotlin.Function1))\
 [Row](https://developer.android.com/reference/kotlin/androidx/compose/foundation/layout/package-summary#Row(androidx.compose.ui.Modifier,androidx.compose.foundation.layout.Arrangement.Horizontal,androidx.compose.ui.Alignment.Vertical,kotlin.Function1))\
-[Text](https://developer.android.com/reference/kotlin/androidx/compose/material/package-summary#Text(kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.text.style.TextAlign,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Function1,androidx.compose.ui.text.TextStyle))\
-UrlImage (`/ui/components/UrlImage`)
+[Text](https://developer.android.com/reference/kotlin/androidx/compose/material/package-summary#Text(kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.graphics.Color,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.font.FontStyle,androidx.compose.ui.text.font.FontWeight,androidx.compose.ui.text.font.FontFamily,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextDecoration,androidx.compose.ui.text.style.TextAlign,androidx.compose.ui.unit.TextUnit,androidx.compose.ui.text.style.TextOverflow,kotlin.Boolean,kotlin.Int,kotlin.Int,kotlin.Function1,androidx.compose.ui.text.TextStyle))
 
 #### Modifiers
 
-[All modifier](https://developer.android.com/jetpack/compose/modifiers-list)\
-background, size, clip, fillMaxSize/Width/Height, size,
-
-# Fonts📏, colors🎨 and shapes📐
-
-The referenced type styles, colors and shapes can be accessed through the `JetsnackTheme`:
-
-```kotlin
-JetsnackTheme.colors.< name > 🎨
-JetsnackTheme.typography.< name > 📏
-JetsnackTheme.shapes.< name > 📐
-```
+[All modifier](https://developer.android.com/jetpack/compose/modifiers-list)
