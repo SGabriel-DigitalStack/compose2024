@@ -14,7 +14,13 @@
   
 ![order_screen_bug](https://github.com/SGabriel-DigitalStack/compose2024/assets/160568109/6b674ae3-22af-4c1e-80ca-659ea99cf3e3)
 
+## 🌟Bonus task
+Add a button that adds a random snack to the cart\
+A snack repository can be found in the `snacks` top level list `/model/Snack.kt`
+
 # 📚 Cheatsheet
+See `Snack` data class (`/model/Snack.kt`)
+
 ```kotlin
 val counter = remember { mutableStateOf(0) }
 
