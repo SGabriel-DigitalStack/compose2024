@@ -29,7 +29,9 @@ import androidx.compose.ui.unit.dp
 import com.android.composeapp.model.OrderItem
 import com.android.composeapp.model.snacks
 import com.android.composeapp.ui.theme.JetsnackTheme
+import com.android.composeapp.ui.util.formatPercent
 import com.android.composeapp.ui.util.formatPrice
+import kotlin.math.roundToLong
 
 private val initialOrder = arrayOf(
   snacks[0].id to OrderItem(snacks[0], 2),
@@ -39,15 +41,16 @@ private val initialOrder = arrayOf(
 @Composable
 fun CartScreen() {
   val cartContent = remember { mutableStateMapOf(*initialOrder) }
-  val itemCount = remember { mutableStateOf(0) }
+  val subtotal = cartContent.values.sumOf { it.count * it.snack.price }
+  val itemCount = cartContent.values.size
+  val tipsPercent = remember { mutableStateOf(0f) }
   Column(
     modifier = Modifier
       .fillMaxSize()
       .background(JetsnackTheme.colors.uiBackground)
   ) {
     Text(
-      //TODO update number of order items
-      text = "Order ${itemCount.value}",
+      text = "Order $itemCount",
       style = MaterialTheme.typography.h6,
       color = JetsnackTheme.colors.brand,
       maxLines = 1,
@@ -59,16 +62,17 @@ fun CartScreen() {
     )
 
     cartContent.values.forEach { orderItem ->
-      itemCount.value++
       CartItem(
         snack = orderItem.snack,
         amount = orderItem.count,
-        removeSnack = { /*TODO remove snack from cart*/ },
+        removeSnack = { snackId -> cartContent.remove(snackId) },
         increaseItemCount = { snackId ->
-          /*TODO increase snack count*/
+          val item = cartContent[snackId] ?: throw IllegalStateException("No snack with $snackId")
+          cartContent[snackId] = item.copy(count = item.count + 1)
         },
         decreaseItemCount = { snackId ->
-          /*TODO decrease snack count*/
+          val item = cartContent[snackId] ?: throw IllegalStateException("No snack with $snackId")
+          cartContent[snackId] = item.copy(count = item.count - 1)
         },
         onSnackClick = {},
       )
@@ -96,17 +100,33 @@ fun CartScreen() {
             .alignBy(LastBaseline)
         )
         Text(
-          //TODO update subtotal
-          text = formatPrice(0),
+          text = formatPrice(subtotal),
           style = MaterialTheme.typography.body1,
           modifier = Modifier.alignBy(LastBaseline)
         )
       }
 
-      //TODO add tips text
+      Row(modifier = Modifier.padding(horizontal = 24.dp)) {
+        Text(
+          text = "Tips",
+          style = MaterialTheme.typography.body1,
+          modifier = Modifier
+            .weight(1f)
+            .wrapContentWidth(Alignment.Start)
+            .alignBy(LastBaseline)
+        )
+        Text(
+          text = formatPercent(tipsPercent.value),
+          style = MaterialTheme.typography.body1,
+          modifier = Modifier.alignBy(LastBaseline)
+        )
+      }
 
       Spacer(modifier = Modifier.height(8.dp))
-      //TODO add TipsSlider
+      TipsSlider(
+        tipsPercent = tipsPercent.value,
+        onValueChange = { tipsPercent.value = it }
+      )
       Spacer(modifier = Modifier.height(8.dp))
 
       Row(modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp)) {
@@ -119,9 +139,9 @@ fun CartScreen() {
             .wrapContentWidth(Alignment.End)
             .alignBy(LastBaseline)
         )
+        val tips = (tipsPercent.value * subtotal).roundToLong()
         Text(
-          //TODO compute total
-          text = formatPrice(0),
+          text = formatPrice(subtotal + tips),
           style = MaterialTheme.typography.subtitle1,
           modifier = Modifier.alignBy(LastBaseline)
         )
