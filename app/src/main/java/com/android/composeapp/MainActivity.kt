@@ -3,8 +3,8 @@ package com.android.composeapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.android.composeapp.model.snacks
-import com.android.composeapp.ui.details.SnackDetail
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import com.android.composeapp.ui.theme.JetsnackTheme
 
 class MainActivity : ComponentActivity() {
@@ -12,8 +12,13 @@ class MainActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
     setContent {
       JetsnackTheme {
-        SnackDetail(snacks[0], backPress = {})
+        ListExample()
       }
     }
   }
+}
+
+@Preview
+@Composable
+fun ListExample() {
 }
